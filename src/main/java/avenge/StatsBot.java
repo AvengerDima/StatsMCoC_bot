@@ -1,5 +1,6 @@
 package avenge;
 
+import avenge.commands.*;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -18,25 +19,14 @@ public class StatsBot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            String chatId = update.getMessage().getChatId().toString();
-            SendMessage message = new SendMessage();
-            message.setChatId(chatId);
-            message.setText("Click the link to open the Mini App: https://avengerdima.github.io/StatsMCoC_bot");
-            try {
-                execute(message);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if (update.hasCallbackQuery()) {
-            String chatId = update.getCallbackQuery().getMessage().getChatId().toString();
-            String data = update.getCallbackQuery().getData();
-            SendMessage message = new SendMessage();
-            message.setChatId(chatId);
-            message.setText("Data received: " + data);
-            try {
-                execute(message);
-            } catch (Exception e) {
-                e.printStackTrace();
+            String messageText = update.getMessage().getText();
+            if (messageText.equals("/start")) {
+                SendMessage message = StartCommand.execute(update);
+                try {
+                    execute(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
