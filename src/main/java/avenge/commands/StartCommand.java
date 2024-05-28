@@ -4,6 +4,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+import org.telegram.telegrambots.meta.api.objects.webapp.WebAppInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,8 @@ public class StartCommand {
 
         InlineKeyboardButton startAppButton = new InlineKeyboardButton();
         startAppButton.setText("Start App");
-        startAppButton.setUrl("https://avengerdima.github.io/StatsMCoC_bot/");
+        WebAppInfo webAppInfo = new WebAppInfo("https://avengerdima.github.io/StatsMCoC_bot/");
+        startAppButton.setWebApp(webAppInfo);
 
         rowInline.add(startAppButton);
         rowsInline.add(rowInline);
