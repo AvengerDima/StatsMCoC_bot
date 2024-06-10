@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App</title>
+    <title>My Stats - Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
@@ -35,10 +35,9 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-        .header .threshold input {
-            padding: 5px;
-            border-radius: 5px;
-            border: none;
+        .header .back-button {
+            cursor: pointer;
+            color: #007BFF;
             font-size: 16px;
         }
         .main-content {
@@ -120,25 +119,22 @@
         <img id="userAvatar" src="" alt="User Avatar">
         <span id="userName"></span>
     </div>
-    <div class="threshold">
-        <input type="number" placeholder="Пороговые смерти">
-    </div>
+    <div class="back-button" onclick="location.href='index.html'">Back to Main</div>
 </div>
 
 <div class="main-content">
-    <h1>[Тег]</h1> <p>[Название Союза]</p>
-    <div class="nickname" id="userNickname"></div>
+    <h1>My Stats</h1>
     <div class="stats">
-        [Итоговые Смерти] / [смерти]
+        <!-- Здесь будет информация о статистике пользователя -->
     </div>
 </div>
 
 <div class="footer">
-    <div class="footer-item active" onclick="location.href='index.html'">
+    <div class="footer-item" onclick="location.href='index.html'">
         <img src="icons/main_icon.png" alt="Main">
         <span>Main</span>
     </div>
-    <div class="footer-item" onclick="location.href='my_stats.html'">
+    <div class="footer-item active">
         <img src="icons/my_stats_icon.png" alt="My Stats">
         <span>My Stats</span>
     </div>
