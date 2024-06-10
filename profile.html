@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telegram Mini App</title>
+    <title>Profile - Telegram Mini App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
@@ -35,36 +35,10 @@
             border-radius: 50%;
             margin-right: 10px;
         }
-        .header .language-select {
-            position: relative;
+        .header .back-button {
             cursor: pointer;
-        }
-        .header .language-select .current-language {
-            padding: 5px;
-            border-radius: 5px;
-            background-color: #007BFF;
+            color: #007BFF;
             font-size: 16px;
-        }
-        .header .language-select .language-options {
-            display: none;
-            position: absolute;
-            top: 30px;
-            right: 0;
-            background-color: #212121;
-            border: 1px solid #007BFF;
-            border-radius: 5px;
-            z-index: 10;
-        }
-        .header .language-select .language-options div {
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        .header .language-select .language-options div:hover {
-            background-color: #007BFF;
-        }
-        .header .profile-icon {
-            cursor: pointer;
-            margin-left: 15px;
         }
         .main-content {
             text-align: center;
@@ -84,13 +58,39 @@
             color: white;
             display: inline;
         }
-        .main-content .nickname {
+        .main-content .nickname, .main-content .alliance {
             font-size: 24px;
             margin: 10px 0;
         }
         .main-content .stats {
             font-size: 18px;
             margin: 10px 0;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #007BFF;
+        }
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            background-color: #333;
+            color: white;
+        }
+        .save-button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
         }
         .footer {
             display: flex;
@@ -127,58 +127,41 @@
         }
     </style>
     <script>
-        Telegram.WebApp.onEvent('viewportChanged', function() {
-            document.body.style.height = Telegram.WebApp.viewportHeight + 'px';
-        });
-
         document.addEventListener('DOMContentLoaded', function() {
-            const user = Telegram.WebApp.initDataUnsafe.user;
-            document.getElementById('userAvatar').src = user.photo_url;
-            document.getElementById('userName').innerText = user.first_name + ' ' + user.last_name;
-            document.getElementById('userNickname').innerText = user.username;
-
-            const languageSelect = document.querySelector('.language-select');
-            const languageOptions = document.querySelector('.language-options');
-            languageSelect.addEventListener('click', () => {
-                languageOptions.style.display = languageOptions.style.display === 'block' ? 'none' : 'block';
-            });
-
-            languageOptions.addEventListener('click', (e) => {
-                if (e.target.classList.contains('language-option')) {
-                    document.querySelector('.current-language').innerText = e.target.innerText;
-                    languageOptions.style.display = 'none';
-                    // Здесь можно добавить логику для изменения локализации
-                }
+            const saveButton = document.querySelector('.save-button');
+            saveButton.addEventListener('click', () => {
+                const nickname = document.getElementById('nickname').value;
+                const alliance = document.getElementById('alliance').value;
+                // Сохраните значения никнейма и альянса в локальное хранилище или отправьте на сервер
+                alert('Saved: ' + nickname + ', ' + alliance);
             });
         });
     </script>
 </head>
 <body>
 <div class="header">
+    <div class="back-button" onclick="location.href='index.html'">Back to Main</div>
     <div class="avatar">
         <img id="userAvatar" src="" alt="User Avatar">
         <span id="userName"></span>
     </div>
-    <div class="language-select">
-        <div class="current-language">ENG</div>
-        <div class="language-options">
-            <div class="language-option">ENG</div>
-            <div class="language-option">UA</div>
-        </div>
-    </div>
-    <img class="profile-icon" src="icons/profile_icon.png" alt="Profile" onclick="location.href='profile.html'">
 </div>
 
 <div class="main-content">
-    <h1>[Тег]</h1> <p>[Название Союза]</p>
-    <div class="nickname" id="userNickname"></div>
-    <div class="stats">
-        [Итоговые Смерти] / [смерти]
+    <h1>Profile</h1>
+    <div class="input-group">
+        <label for="nickname">Nickname:</label>
+        <input type="text" id="nickname">
     </div>
+    <div class="input-group">
+        <label for="alliance">Alliance:</label>
+        <input type="text" id="alliance">
+    </div>
+    <button class="save-button">Save</button>
 </div>
 
 <div class="footer">
-    <div class="footer-item active" onclick="location.href='index.html'">
+    <div class="footer-item" onclick="location.href='index.html'">
         <img src="icons/main_icon.png" alt="Main">
         <span>Main</span>
     </div>
